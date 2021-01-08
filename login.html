@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+
+    html {
+    height: 100%;
+    }
+
+    body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: gray;
+    }
+
+    #main {
+    width: 40%;
+    height: 60%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: white;
+    }
+
+    #login-form {
+    align-self: flex-start;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    }
+
+    .login-form {
+    border: none;
+    border-bottom: 1px solid #3a3a3a;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px 0px 5px 5px;
+    }
+
+    #submit {
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    background-color: rgb(188, 199, 188);
+    cursor: pointer;
+    outline: none;
+    }
+    </style>
+</head>
+<body>
+    <main id="main">
+        <h1 id="login-header">Login</h1>
+        <form id="login-form">
+          <input type="text" name="username"  class="login-form" placeholder="Username">
+          <input type="password" name="password" class="login-form" placeholder="Password">
+          <input type="submit" value="Login" id="submit">
+        </form>
+      
+    </main>
+    <script>
+        const loginForm = document.getElementById("login-form");
+        const loginButton = document.getElementById("submit");
+        loginButton.addEventListener("click", (click) => {
+        click.preventDefault();
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
+
+        if (username === "woojin" && password === "kenji" || username === "kenji" && password === "woojin") {
+            alert("You are successfully logged in.");
+            window.open('homepage.html',"_self")
+        } else {
+            alert("You are not successfully logged in.");
+        }
+        })
+    </script>
+</body>
+</html>

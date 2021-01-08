@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi">
+    <title>ThatGameWebsite</title>
+</head>
+<body>
+  <div class="banner">
+    <a href="homepage.html"><div class="title" >ThatGameWebsite.com</div></a>
+  </div>
+    <div id="pagebody">
+      <ul id="menu">
+        <li id="menu01"><a href="game1.html">Game1</a></li>
+        <li id="menu02"><a href="game2.html">Game2</a></li>
+        <li id="menu03"><a href="game3.html">Game3</a></li>
+        <li id="menu04"><a href="game4.html">Game4</a></li>
+        <li id="menu05"><a href="about.html">About us</a></li>
+      </ul>
+    <div id="content">
+		<div id="news">
+      <h1><b><u>Picture Flipping Game</u></b></h1>
+      <pre>
+        This is the picture flipping game and has to be all flip.
+        These are the rules. You can time yourself to fight with rankers.^^
+        1.Flip two cards.
+
+        2.If those two are the same picture, I can get the card. 
+        If it is a different picture, have to return it to the original place.
+        
+        3.If the numbers are the same as above, flip two more picture → Return to 2.
+      </pre>
+      <ul id="card">
+      </ul>
+		</div>
+		<div id="pickup">
+			<h2>Ranking (Top 3)</h2>
+                    <ul>
+							<li>TOP 1 : Kenji (1 min 28 sec) <br>
+							<img src="https://images-na.ssl-images-amazon.com/images/I/41cRGy1wSTL._AC_.jpg" width="100px" height="200px"></li>
+              <li>TOP 2 : Woojin (2min 1 sec)<br>
+              <img src="https://builder.crownawards.com/StoreFront/ImageCompositionServlet?files=jsp/builderimages/BaseFiles/medals/CM092PRS.png,jsp/builderimages/Ribbon/RI2020SP.png,,&width=378&trim=true" width="100px" height="200px"></li>
+							<li>TOP 3 : <br>
+							<img src="https://builder.crownawards.com/StoreFront/ImageCompositionServlet?files=jsp/builderimages/BaseFiles/medals/CM093PRB.png,jsp/builderimages/Ribbon/RI2020SP.png,,&width=378&trim=true" width="100px" height="200px"></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="footer">
+            <p>Producer：Woojin Oh : All rights are reserved.</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    var total = 20;  
+    var speed = 130;  
+    var returnSec = 1000;  
+    var cool = []; 
+    var index; 
+    var first = true;  
+    var card1;  
+    var card2;  
+    var pair = 0;  
+    
+    function cardClose(i,n){
+      $("#card li:eq("+i+")").stop().animate({ left: "75"}, speed);
+      $("#card li:eq("+i+") img").stop().animate({ width: "0",height: "200px"}, speed,
+      function(){
+        n(i);
+      });
+    }
+
+    function fronto(){
+      $("#card li:eq("+index+") img").attr("src","img/card"+cool[index]+".png");
+      $("#card li:eq("+index+") img").stop().animate({ width: "150px",height: "200px"}, speed);
+      $("#card li:eq("+index+")").stop().animate({ left: "0"}, speed);
+    }
+   
+    function back(j){
+      $("#card li:eq("+j+") img").attr("src","img/card.png");
+      $("#card li:eq("+j+") img").stop().animate({ width: "150px",height: "200px"}, speed);
+      $("#card li:eq("+j+")").stop().animate({ left: "0"}, speed);
+    }
+    
+    function cardlock(){
+      $("#card li:eq("+index+")").addClass("lock");
+    }
+
+    function alllock(){
+      $("#card li").addClass("lock");
+    }
+
+    function unlock(){
+      $("#card li").removeClass("lock");
+    }
+
+    function comparison() {
+      if(card1==card2){  
+        $("#card li:eq("+index+")").addClass("off");  
+        $("#card li:eq("+index1+")").addClass("off");  
+        pair++;  
+        if(pair==total/2){  
+          setTimeout(function(){  
+            alert("Clear")
+          }, returnSec);
+        }
+      } else {  
+        setTimeout(function(){  
+            cardClose(index,back);  
+            cardClose(index1,back);  
+        }, returnSec);
+      }
+      first = true;  
+      card2 = 0;  
+      setTimeout(function(){
+        unlock();  
+      }, returnSec+speed*2);
+    }
+    
+    
+    $(function(){
+    
+      for(i=1; i<=total/2; i++) {
+        cool.push(i,i);
+      }
+     
+      cool.sort(function() {
+        return Math.random() - Math.random();
+      });
+      
+      for(i=1; i<=total; i++) {
+        $("#card").append("<li><img src='img/card.png'></li>");
+      }
+    
+      $("#card li").click(function(){
+        index = $("#card li").index(this);  
+        cardlock();  
+        cardClose(index,fronto);  
+    
+        if(first == true){  
+          index1 = index;  
+          card1= cool[index];  
+          first = false;  
+    
+        } else {  
+          alllock();  
+          card2 = cool[index];  
+          comparison();  
+        }
+      });
+    
+    });
+    function goBack() {
+    window.history.back();
+}   
+    </script>
+</div>
+</body>
+</html>

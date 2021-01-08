@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi">
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background: white;
+            margin: 0px;
+            background-color: black;
+        }
+
+        div.title {
+            position: absolute;
+            top: 70px;
+            left: 2%;
+            font-family: 'Alatsi';
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 130px 600px;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .banner {
+            position: relative;
+            background-color: black;
+        }
+
+        .panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(255, 255, 255);
+            border: 5px solid gray;
+            width: 225px;
+            height: 350px;
+            margin: 0px 1rem;
+        }
+
+        .content {
+            position: relative;
+            text-align: center;
+            white-space: nowrap;
+            background-color: black;
+        }
+
+        div.panel {
+            display: inline-block;
+            position: relative;
+            top: 17%;
+        }
+
+        .button {
+            position: absolute;
+            top: 85%;
+            left: 60%;
+            width: 150px;
+            height: 100px;
+            background-color: lightgreen;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 50px;
+            font-weight: bold;
+        }
+
+        div.result {
+            position:absolute;
+            top: 85%;
+            left: 30%;
+            width: 25%;
+            height: 100px;
+            background-color: gray;
+            text-align: center;
+            vertical-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            font-size: 38px;
+            color: red;
+            border:5px solid black ;
+            white-space: nowrap;
+        }
+
+        img {
+            position: absolute;
+            top:30%;
+            width: 50%;
+            left: 25%;
+        }
+
+        .line {
+            top: 45%;
+            position: absolute;
+            height: 8px;
+            width: 950px;
+            background-color: red;
+            z-index: 1;
+            left: 22%;
+            white-space: nowrap;
+        }
+
+        .payline {
+            top: 43%;
+            left: 300px;
+            position: absolute;
+            height: 30px;
+            width: 150px;
+            background-color: red;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            vertical-align: middle;
+            line-height: 30px;
+        }
+
+        .vibrate {
+            animation: move 0.2s 15;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        @keyframes move {
+            0%,100% {
+                transform: translateY(-22px);
+                filter: blur(5px);
+            }
+            20%, 80% {
+                transform: translateY(42px);
+            }
+            30%, 50%, 70% {
+                transform: translateY(-42px);
+            }
+            40%,60% {
+                transform: translateY(42px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <a href="homepage.html"><div class="title" >ThatGameWebsite.com</div></a>
+        </div>
+        <div class="content">
+            <div class="payline">PAYLINE</div>
+            <div class="line"></div>
+            <div class="panel" ><img src="" id="p1" ></div>
+            <div class="panel" ><img src="" id="p2"></div>
+            <div class="panel" ><img src="" id="p3"></div>
+            <input type="button" value="SPIN" class="button">
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+    <script>
+        var items = ["bell", "cherry", "clover", "crown", "diamond", "dice", "money"];
+
+        var panel1 = document.querySelector('#p1');
+        var panel2 = document.querySelector('#p2');
+        var panel3 = document.querySelector('#p3');
+
+        var array = [panel1, panel2, panel3];
+
+        function spin() {
+            var count = 0;
+            var begin = setInterval(function() {
+            for (let i = 0; i < array.length; i++) {
+                array[i].src = `img/${items[count]}.png`;
+                if (count < items.length-1) {
+                    count+=1;
+                } else {
+                    count = 0;
+                };
+            };
+            },150);
+            for (let i = 0; i < array.length; i++) {
+                array[i].classList.toggle('vibrate');
+            };
+            var end = setTimeout(function() {
+                clearInterval(begin);
+                for (let i = 0; i < array.length; i++) {
+                array[i].classList.toggle('vibrate');
+                var random = Math.floor(Math.random()*items.length);
+                    array[i].src = `img/${items[random]}.png`;
+                };
+                check();
+                button.disabled = false;
+                },3000);
+        }
+
+        function check() {
+            if (array[0].src == array[1].src && array[1].src == array[2].src) {
+                document.getElementById('result').innerHTML = "WIN";
+            } else {
+                document.getElementById('result').innerHTML = "LOSE";
+            }
+        }
+
+        var button = document.querySelector('.button');
+        
+        button.addEventListener('click', function(){
+            document.getElementById('result').innerHTML = "";
+            button.disabled = true;
+            spin();
+        });
+    </script>
+</body>
+</html>

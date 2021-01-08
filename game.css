@@ -1,0 +1,90 @@
+.banner {
+    position: relative;
+	background-color: black;
+	height: 130px;
+	width: 100%;
+}
+div.title {
+	position: absolute;
+	top: 70px;
+	left: 2%;
+	font-family: 'Alatsi';
+	font-size: 36px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+body {
+	background-image: url(https://tk.ismcdn.jp/mwimgs/7/f/1140/img_7f4b7a3a6f582747fec869dfbaa7568c498239.jpg);	
+	text-align:center;	
+	margin: 0em;	
+}
+div#pagebody {
+	width:1200px; margin:0 auto;	
+	text-align:left;	
+	background-color:#ffffff;		
+}
+ul#menu {
+	height:42px; background-color:#eeeeee; font-weight:bold;
+}
+li#menu01,li#menu02,li#menu03,li#menu04,li#menu05 {
+	float:left;			
+	display:inline;			
+	list-style-type:none;		
+}
+li#menu01 {
+	width:250px; height:42px;	
+	background-color:#FFB1BC;	
+}
+li#menu02 {
+	width:250px; height:42px;	
+	background-color:#FF9966;	
+}
+li#menu03 {
+	width:250px; height:42px;	
+	background-color:#FFE4B4;	
+}
+li#menu04 {
+	width:250px; height:42px;	
+	background-color:#06AA46;	
+}
+li#menu05 {
+	width:200px; height:42px;	
+	background-color:#4682B4;	
+}
+ul#menu a {
+	display:block;				
+	height:42px; padding-top:4px; text-align:center;
+	text-decoration:none; 			
+	font-family:Arial, Helvetica, sans-serif;	
+}
+
+div#content {
+	width:1150px; margin:10px 20px 10px 0px;	
+	float:right;				
+}
+div#news {
+	width:850px; margin-right:5px; padding-top:10px; 
+	float:left;				
+	background-color:#ffffff;	
+	background-repeat:no-repeat;			
+}
+div#pickup {
+	width:250px; padding-top:10px; 		
+    float:right;				
+}
+div#footer {
+	height:30px; text-align:center;
+	clear:both;					
+	background-color:#cccccc;			
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  li {
+    float: left;
+  }

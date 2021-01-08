@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alatsi">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jQueryRotate.js"></script>
+    <title>ThatGameWebsite</title>
+</head>
+<body>
+    <style>
+        .banner {
+            position: relative;
+            background-color: black;
+            height: 130px;
+            width: 100%;
+        }
+
+        div.title {
+            position: absolute;
+            top: 70px;
+            left: 2%;
+            font-family: 'Alatsi';
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+
+        #game {
+            margin: 100px auto 0;
+            width: 500px;
+            height: 400px;
+            background: url(img/cow0.png) no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #text {
+            margin: 10px auto;
+            width: 500px;
+        }
+
+        #count, #score {
+            margin-left: 15px;
+            font-size: 18px;
+            line-height: 1;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            float: right;
+        }
+
+        #count span, #score span {
+            font-size: 28px;
+        }
+
+        .mushi {
+            width: 30px;
+            height: 30px;
+            background: url(img/mushi.gif) no-repeat;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            left: 500px;
+            top: 400px;
+            opacity: 0;
+        }
+
+        #start {
+            margin: -30px 0 0 -60px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 50px;
+            width: 120px;
+            background-color: red;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 50px;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none;
+            cursor: pointer;
+        }
+
+        #start:hover {
+            opacity: 0.8;
+        }
+
+    </style>
+  <div class="banner">
+    <a href="homepage.html"><div class="title" >ThatGameWebsite.com</div></a>
+  </div>
+  <div id="pagebody">
+    <ul id="menu">
+      <li id="menu01"><a href="game1.html">Game1</a></li>
+      <li id="menu02"><a href="game2.html">Game2</a></li>
+      <li id="menu03"><a href="game3.html">Game3</a></li>
+      <li id="menu04"><a href="game4.html">Game4</a></li>
+      <li id="menu05"><a href="about.html">About us</a></li>
+    </ul>
+    <div id="content">
+		<div id="news">
+      <h1><b><u>Attack of the Mushi</u></b></h1>
+      <pre>
+        This is a bug killing game!
+        1. Click on the start button!
+        2. When the turd appears, mushi will start popping up, so click on them as fast as you can to kill them.
+        3. Click on as many as you can before time runs out to get the highest score!
+      </pre>
+    <div id="text">
+        <div id="count">Count: <span>20</span></div>
+        <div id="score">Score: <span>0</span></div>
+    </div>
+    <div id="game">
+        <button id="start">START</button>
+        <button class="mushi"></button>
+    </div>
+    <script>
+        var score = 0;
+        var count = 20;
+        var newMushi,timer,anime, beginTimer;
+        var cowframe = 0;
+    
+        function getPosition() {
+            return {
+                left: Math.floor(Math.random()*500),
+                top: Math.floor(Math.random()*400)
+            };
+        }
+    
+        function degree() {
+            return Math.floor(Math.random()*360);
+        }
+    
+        function born() {
+            newMushi = setInterval(function() {
+                $('.mushi:first-child')
+                .clone()
+                .appendTo('#game')
+                .css(getPosition())
+                .animate({opacity:1},2000)
+                .animate(getPosition(), 7000)
+                .rotate(degree())
+            }, 500);
+        }
+    
+        $('#game').on('click', '.mushi', function() {
+            $(this)
+            .css('background', 'url(img/pop.png)')
+            .prop("disabled", true)
+            .stop(true, false).animate({opacity:0}, 500, function() {
+                $(this).remove();
+            });
+            score +=10;
+            $('#score span').text(score);
+        });
+    
+        $('#start').click(function() {
+            $(this).animate({opacity:0}, 300, function() {
+                $(this).remove();
+            });
+            anime = setInterval(function () {
+                $('#game').css('background', `url(img/cow${cowframe}.png)`);
+                cowframe++;
+                if (cowframe > 2) {
+                    clearInterval(anime);
+                };
+            },1000);
+            beginTimer = setTimeout(function() {
+                born();
+                timer = setInterval(function(){
+                if(count==0) {
+                    clearInterval(timer);
+                    clearInterval(newMushi);
+                    $('.mushi').prop("disabled", true);
+                    alert('Your score is...' + score + "!");
+                } else {
+                    count --;
+                    $('#count span').text(count);
+                };
+                }, 1000);
+            }, 3000);
+        });
+    </script>
+      </ul>
+		</div>
+		<div id="pickup">
+			<h2>Ranking (Top 3)</h2>
+                <ul>
+				<li>TOP 1 : Kenji (220pt) <br>
+				<img src="https://images-na.ssl-images-amazon.com/images/I/41cRGy1wSTL._AC_.jpg" width="100px" height="200px"></li>
+                <li>TOP 2 : Woojin (200pt)<br>
+                <img src="https://builder.crownawards.com/StoreFront/ImageCompositionServlet?files=jsp/builderimages/BaseFiles/medals/CM092PRS.png,jsp/builderimages/Ribbon/RI2020SP.png,,&width=378&trim=true" width="100px" height="200px"></li>
+				<li>TOP 3 : Maruken (190pt)<br>
+				<img src="https://builder.crownawards.com/StoreFront/ImageCompositionServlet?files=jsp/builderimages/BaseFiles/medals/CM093PRB.png,jsp/builderimages/Ribbon/RI2020SP.png,,&width=378&trim=true" width="100px" height="200px"></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="footer">
+            <p>Producer：Woojin Oh : All rights are reserved.</p>
+    </div>
+</body>
+</html>

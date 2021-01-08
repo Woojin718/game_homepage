@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Fukuwarai-Girl</title>
+    <style type="text/css">
+      * { margin:0; padding:0; }
+      body {
+        background-image: url(img/cute.png);	
+      }
+      .parts {
+        position: absolute;
+      }
+      #eyeb-r {
+        top: 550px;
+        right: 350px;
+      }
+      #eyeb-l {
+        top: 450px;
+        right: 300px;
+      }
+      #eye-r {
+        top: 350px;
+        left: 270px;
+      }
+      #eye-l {
+        top: 350px;
+        right: 350px;
+      }
+      #mouth {
+        top: 500px;
+        left: 290px;
+      }
+      #nose {
+        top: 550px;
+        left: 320px;
+      }
+      #example {
+        padding: 20px;
+        width: 200px;
+        background: #FFF;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        border: #000 2px solid;
+      }
+      #example img {
+        width: 100%;
+      }
+      #hide {
+        width: 508px;
+        height: 513px;
+        background: #ccc;
+        position: absolute;
+        top: 80px;
+        left: calc(50% - 254px);
+        z-index: 10;
+        pointer-events: none;
+        display: none;
+      }
+      #face {
+        margin: 80px auto 0;
+        background: url(img/face.png) no-repeat;
+        width: 508px;
+        height: 513px;
+        z-index: -1;
+        position: relative;
+      }
+      button {
+        margin: 30px auto 0;
+        padding: 15px 0;
+        width: 200px;
+        color: #FFF;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        text-align: center;
+        display: block;
+      }
+      button#start {
+        background: #73B9FF;
+      }
+      button#finish {
+        background: #FF2626;
+        display: none;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+
+    $(function(){
+
+      $("#start").on("click", function(){
+        $(".parts").draggable();
+        $("#hide").show();
+        $(this).hide();
+        $("#finish").show();
+      });
+
+      $("#finish").on("click", function(){
+        $("#hide").hide();
+        $(".parts").draggable("disable");
+      });
+    });
+    function goBack() {
+    window.history.back();
+    }  
+  </script>
+  </head>
+  <body>
+
+    <div id="example"><img src="img/example.png" alt=""></div>
+    <div id="face"></div>
+    <div id="eyeb-r" class="parts"><img src="img/eyeb-r.png"></div>
+    <div id="eyeb-l" class="parts"><img src="img/eyeb-l.png"></div>
+    <div id="eye-r" class="parts"><img src="img/eye-r.png"></div>
+    <div id="eye-l" class="parts"><img src="img/eye-l.png"></div>
+    <div id="nose" class="parts"><img src="img/nose.png"></div>
+    <div id="mouth" class="parts"><img src="img/mouth.png"></div>
+    <div id="hide"></div>
+
+    <button id="start">Start!!</button>
+    <button id="finish">Finish!!</button>
+    <a href = "homepage.html">Back to Homepage</a><br>
+    <a href = "game4.html">Back to Game4</a>
+  </body>
+</html>
